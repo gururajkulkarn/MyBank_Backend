@@ -11,7 +11,12 @@ const MonthlyDataModel = require('./models/MonthlyDataModel');
 const AdminModel = require('./models/Admin');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'https://mybankgk.netlify.app/',  // Replace with the actual frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  }));
+  
 app.use(express.json());
 
 // Connect to MongoDB
