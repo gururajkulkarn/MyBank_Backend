@@ -11,13 +11,26 @@ const MonthlyDataModel = require('./models/MonthlyDataModel');
 const AdminModel = require('./models/Admin');
 
 const app = express();
+app.use(express.json()); // Ensure this line is in your server setup
+
+// Enable CORS with specific origins
 app.use(cors({
-    origin: 'https://mybankgk.netlify.app/',  // Replace with the actual frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: [
+        'http://localhost:5173',  // Local development URL
+        'https://mybankgk.netlify.app'  // Production frontend URL
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include OPTIONS in methods
     allowedHeaders: ['Content-Type', 'Authorization'],
-  }));
-  
-app.use(express.json());
+    credentials: true  // If you're using cookies or other credentials
+}));
+
+// Handle preflight requests (CORS preflight checks)
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');  // Allow all origins or specify if needed
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.sendStatus(200);
+});
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://gururajk:guru123@cluster0.4uu67a5.mongodb.net/mybank', {
