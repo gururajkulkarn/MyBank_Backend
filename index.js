@@ -12,7 +12,7 @@ const AdminModel = require('./models/Admin');
 
 const app = express();
 app.use(express.json()); // Ensure this line is in your server setup
-
+``
 // Enable CORS with specific origins
 app.use(cors({
     origin: [
