@@ -22,7 +22,7 @@ const monthlyDataSchema = new mongoose.Schema({
     longLoanStatus: String,
     penaltyFee:  Number,
     cmonthYear: String 
-    // monthYear:  String 
+    
 });
 
 const MonthlyDataModel = mongoose.model("monthlydatas", monthlyDataSchema)
